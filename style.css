@@ -1,12 +1,10 @@
-/* style.css - Localizado na pasta css/ */
+/* style.css */
 
-/* Estilos de corpo básico e tipografia */
 body {
     background-color: #f4f7f6; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Estilo para os Cards (Design Moderno) */
 .card {
     border-radius: 12px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -17,28 +15,19 @@ body {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
-/* Cores de ícones e textos para Receita e Despesa */
+/* Cores do Dashboard */
 .text-success { color: #28a745 !important; }
 .text-danger { color: #dc3545 !important; }
-.text-info { color: #17a2b8 !important; } /* Cor para o novo card KM */
+.text-primary { color: #007bff !important; } 
+.text-info { color: #17a2b8 !important; }
 
 /* Estilo para as linhas da tabela (Parte clicável) */
-#tabelaRegistros tbody tr {
+#tabelaReceitas tbody tr, #tabelaDespesas tbody tr {
     cursor: pointer;
 }
 
-#tabelaRegistros tbody tr:hover {
-    background-color: #e9ecef; /* Destaque ao passar o mouse */
-}
-
-/* Ajustes de responsividade (Fluido e Compacto) */
-@media (max-width: 767px) {
-    .fs-4 { 
-        font-size: 1.2rem !important;
-    }
-    .d-flex.flex-wrap > * {
-        flex-grow: 1; 
-    }
+#tabelaReceitas tbody tr:hover, #tabelaDespesas tbody tr:hover {
+    background-color: #e9ecef;
 }
 
 /* Estilo de foco nos formulários */
@@ -50,4 +39,71 @@ body {
 #formDespesa input:focus, #formDespesa select:focus {
     border-color: #dc3545;
     box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+/* --------------------------------- */
+/* Item 3: Estilos de Impressão */
+/* --------------------------------- */
+@media print {
+    /* Esconde tudo que está marcado como no-print */
+    .no-print {
+        display: none !important;
+    }
+    
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 12pt;
+    }
+
+    .container {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
+    h1, h5 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Garante que o Dashboard (resumo) seja impresso corretamente */
+    #dashboard-resumo {
+        display: flex;
+        flex-direction: row !important;
+        justify-content: center;
+    }
+    
+    #dashboard-resumo .col-lg-3 {
+        width: 25% !important;
+    }
+
+    .card {
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        page-break-inside: avoid; /* Evita que o card seja quebrado entre páginas */
+    }
+
+    /* Esconde a navegação das abas, mas mostra o conteúdo de AMBAS as abas */
+    #myTab {
+        display: none !important;
+    }
+    
+    .tab-pane {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        page-break-before: auto;
+    }
+    
+    #historico-container {
+        margin-top: 30px;
+    }
+
+    /* Estilo básico para a tabela de impressão */
+    .table {
+        margin-top: 15px;
+    }
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(0, 0, 0, 0.05) !important;
+    }
 }
